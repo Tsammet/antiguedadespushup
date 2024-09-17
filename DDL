@@ -1,0 +1,71 @@
+CREATE DATABASE antiguedades;
+USE antiguedades;
+CREATE TABLE Rol (
+    role_id INT AUTO_INCREMENT PRIMARY KEY,
+    RolNombre VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Usuario (
+    usuario_id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Email VARCHAR(100) NOT NULL UNIQUE,
+    Password VARCHAR(255) NOT NULL,
+    role_id INT,
+    FOREIGN KEY (role_id) REFERENCES Rol(role_id)
+);
+
+CREATE TABLE Actividad_Usuario (
+    actividad_id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT,
+    Accion VARCHAR(255) NOT NULL,
+    Fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES Usuario(usuario_id)
+);
+
+CREATE TABLE Registro_Acceso (
+    Acceso_id INT AUTO_INCREMENT PRIMARY KEY,
+    Usuario_id INT,
+    Fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (Usuario_id) REFERENCES Usuario(usuario_id)
+);
+CREATE TABLE Categoria (
+    Categoria_id INT AUTO_INCREMENT PRIMARY KEY,
+    Nombre_Categoria VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE Antiguedad (
+    ANTIGUEDAD_ID INT AUTO_INCREMENT PRIMARY KEY,
+    Vendedor_id INT,
+    Categoria_id INT,
+    Descripcion TEXT,
+    Epoca VARCHAR(50),
+    Condicion VARCHAR(100),
+    Precio DECIMAL(10, 2),
+    Estado ENUM('en venta', 'vendido', 'retirado') DEFAULT 'en venta',
+    FOREIGN KEY (Vendedor_id) REFERENCES Usuario(usuario_id),
+    FOREIGN KEY (Categoria_id) REFERENCES Categoria(Categoria_id)
+);
+
+CREATE TABLE Foto_Antiguedad (
+    Foto_id INT AUTO_INCREMENT PRIMARY KEY,
+    Antiguedad_id INT,
+    Foto_url VARCHAR(255) NOT NULL,
+    FOREIGN KEY (Antiguedad_id) REFERENCES Antiguedad(ANTIGUEDAD_ID)
+);
+
+CREATE TABLE Transaccion (
+    Transaccion_id INT AUTO_INCREMENT PRIMARY KEY,
+    Comprador_id INT,
+    Vendedor_id INT,
+    Antiguedad_id INT,
+    Fecha_transaccion DATETIME DEFAULT CURRENT_TIMESTAMP,
+    Estado_pago ENUM('pendiente', 'completado') DEFAULT 'pendiente',
+    Estado_entrega ENUM('pendiente', 'enviado', 'entregado') DEFAULT 'pendiente',
+    Cantidad_Pagada DECIMAL(10, 2),
+    Metodo_Pago VARCHAR(100),
+    Fecha_Pago DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (Comprador_id) REFERENCES Usuario(usuario_id),
+    FOREIGN KEY (Vendedor_id) REFERENCES Usuario(usuario_id),
+    FOREIGN KEY (Antiguedad_id) REFERENCES Antiguedad(ANTIGUEDAD_ID)
+); 
+
