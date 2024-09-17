@@ -45,6 +45,7 @@ WHERE
 -- de la venta, el precio de venta y el comprador."
 
 ```sql
+
 SELECT 
     a.Descripcion AS Nombre_Pieza,
     t.Fecha_transaccion AS Fecha_Venta,
@@ -66,6 +67,7 @@ WHERE
 -- mes."
 
 ```sql
+
 SELECT 
     SUM(t.Cantidad_Pagada) AS Total_Ventas
 FROM 
@@ -79,6 +81,7 @@ WHERE
 -- "Identifica los clientes que han realizado la mayor cantidad de compras en la plataforma."
 
 ```sql
+
 SELECT 
     u.Nombre AS Cliente,
     COUNT(t.Transaccion_id) AS Cantidad_Compras
@@ -98,6 +101,7 @@ ORDER BY
 -- fechas específico, incluyendo la información del vendedor y comprador."
 
 ```sql
+
 SELECT 
     a.Descripcion AS Nombre_Pieza,
     t.Fecha_transaccion AS Fecha_Venta,
@@ -122,6 +126,7 @@ WHERE
 -- fechas específico, incluyendo la información del vendedor y comprador."
 
 ```sql
+
 SELECT 
     c.Nombre_Categoria AS Categoria,
     COUNT(a.ANTIGUEDAD_ID) AS Cantidad_Articulos
