@@ -2,6 +2,8 @@
 
 -- "Obtén una lista de todas las piezas antiguas que están actualmente disponibles para la
 -- venta, incluyendo el nombre de la pieza, su categoría, precio y estado de conservación."
+
+```sql
 SELECT 
     a.Descripcion AS Nombre_Pieza,
     c.Nombre_Categoria AS Categoria,
@@ -13,7 +15,8 @@ JOIN
     Categoria c ON a.Categoria_id = c.Categoria_id
 WHERE 
     a.Estado = 'en venta';
-    
+```sql
+
 
 -- 2 Consulta para buscar antigüedades por categoría y rango de precio:
 -- "Busca todas las antigüedades dentro de una categoría específica (por ejemplo, 'Muebles')
