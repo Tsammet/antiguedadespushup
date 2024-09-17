@@ -15,7 +15,7 @@ JOIN
     Categoria c ON a.Categoria_id = c.Categoria_id
 WHERE 
     a.Estado = 'en venta';
-```sql
+```
 
 
 -- 2 Consulta para buscar antigüedades por categoría y rango de precio:
@@ -38,7 +38,6 @@ WHERE
     c.Nombre_Categoria = 'Muebles' 
     AND a.Precio BETWEEN 750.00 AND 1200.00
     AND a.Estado = 'en venta';
-```sql
     
     
 -- 3 Consulta para mostrar el historial de ventas de un cliente específico:
